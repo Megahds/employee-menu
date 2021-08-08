@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Employee</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container my-3 pb-3 px-0 border" id="add-kyw">
+        <div class="d-flex justify-content-between bg-light">
+            <div class="p-3 font-weight-bold">
+                <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-plus-circle-fill"
+                        viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                </svg>
+                Add Karyawan
+            </div>
+        </div>
+        <form
+                th:action="@{/save}"
+                th:object="${employee}"
+                method="post"
+                class="mx-3 mt-3">
+            <div class="form-group">
+                <label for="nama">Nama</label>
+                <input
+                        th:field="*{name}"
+                        type="text"
+                        class="form-control"
+                        id="nama"
+                        placeholder="Masukkan nama"
+                        name="nama"
+                        required
+                >
+            </div>
+            <div class="form-group">
+                <label for="tgl-msk">Tanggal Masuk</label>
+                <input
+                        th:field="*{tglMasuk}"
+                        type="date"
+                        class="form-control"
+                        id="tgl-msk"
+                        name="tgl-msk"
+                        required
+                >
+            </div>
+            <div class="form-group">
+                <label for="phone-num">Nomor HP</label>
+                <input
+                        th:field="*{noHP}"
+                        type="text"
+                        class="form-control"
+                        id="phone-num"
+                        placeholder="Masukkan No. HP"
+                        name="phone-num"
+                        required
+                >
+            </div>
+            <div class="form-group">
+                <label for="limit-reimb">Limit Reimbursement</label>
+                <input
+                        th:field="*{limitReimb}"
+                        type="number"
+                        class="form-control"
+                        id="limit-reimb"
+                        placeholder="Limit Reimbursement"
+                        name="limit-reimb"
+                        required
+                >
+            </div>
+            <button type="submit" class="btn btn-primary" >
+                <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-plus-circle-fill"
+                        viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                </svg>
+                Submit
+            </button>
+        </form>
+    </div>
+</body>
+</html>
