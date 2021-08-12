@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,8 @@ public class EmployeeDaoImpl extends JdbcDaoSupport implements EmployeeDao {
     @Override
     public void addEmployeeToDB(Employee emp) {
         String sql = "INSERT INTO employee "
-                + "(name, tanggal_masuk, no_hp, limit_reimb) VALUES (?, ?, ?, ?)";
+                + "(name, tanggal_masuk, no_hp, limit_reimb, created_date, updated_date) "
+                + "VALUES (?, ?, ?, ?, CURRENT_DATE, CURRENT_DATE)";
 
         getJdbcTemplate().update(sql, new Object[] {
                 emp.getName(),
@@ -51,9 +53,10 @@ public class EmployeeDaoImpl extends JdbcDaoSupport implements EmployeeDao {
             Employee emp = new Employee();
             emp.setId((int)row.get("id"));
             emp.setName((String)row.get("name"));
-            emp.setTglMasuk((String)row.get("tanggal_masuk"));
+            emp.setTglMasuk((Date) row.get("tanggal_masuk"));
             emp.setNoHP((String)row.get("no_hp"));
             emp.setLimitReimb((String)row.get("limit_reimb"));
+            emp.setUpdatedDate((Date) row.get("updated_date"));
             result.add(emp);
         }
 
@@ -74,9 +77,10 @@ public class EmployeeDaoImpl extends JdbcDaoSupport implements EmployeeDao {
                         Employee emp = new Employee();
                         emp.setId(rs.getInt("id"));
                         emp.setName(rs.getString("name"));
-                        emp.setTglMasuk(rs.getString("tanggal_masuk"));
+                        emp.setTglMasuk(rs.getDate("tanggal_masuk"));
                         emp.setNoHP(rs.getString("no_hp"));
                         emp.setLimitReimb(rs.getString("limit_reimb"));
+                        emp.setUpdatedDate(rs.getDate("updated_date"));
                         return emp;
                     }
                 });
@@ -88,7 +92,8 @@ public class EmployeeDaoImpl extends JdbcDaoSupport implements EmployeeDao {
                 + "SET name = ?, "
                 + "tanggal_masuk = ?, "
                 + "no_hp = ?, "
-                + "limit_reimb = ? "
+                + "limit_reimb = ?, "
+                + "updated_date = CURRENT_DATE "
                 + "WHERE id = ?";
 
         getJdbcTemplate().update(sql,

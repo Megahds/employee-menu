@@ -2,7 +2,9 @@ package com.example.employeemenu.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
+import java.util.Date;
+
+//import java.time.LocalDate;
 
 public class Employee {
 
@@ -10,16 +12,22 @@ public class Employee {
 
     private String name;
 
-    private String tglMasuk;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date tglMasuk;
 
     private String noHP;
 
     private String limitReimb;
 
+//    private String createdDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date updatedDate;
+
     public Employee() {
     }
 
-    public Employee(int id, String name, String tglMasuk, String noHP, String limitReimb) {
+    public Employee(int id, String name, Date tglMasuk, String noHP, String limitReimb) {
         this.id = id;
         this.name = name;
         this.tglMasuk = tglMasuk;
@@ -49,11 +57,11 @@ public class Employee {
         this.name = name;
     }
 
-    public String getTglMasuk() {
+    public Date getTglMasuk() {
         return tglMasuk;
     }
 
-    public void setTglMasuk(String tglMasuk) {
+    public void setTglMasuk(Date tglMasuk) {
         this.tglMasuk = tglMasuk;
     }
 
@@ -71,6 +79,22 @@ public class Employee {
 
     public void setLimitReimb(String limitReimb) {
         this.limitReimb = limitReimb;
+    }
+
+//    public String getCreatedDate() {
+//        return createdDate;
+//    }
+//
+//    public void setCreatedDate(String createdDate) {
+//        this.createdDate = createdDate;
+//    }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
     }
 
 //    public LocalDate getCreatedDate() {
@@ -100,6 +124,8 @@ public class Employee {
                 + " noHP = "
                 + noHP
                 + " limitReimb = "
-                + limitReimb;
+                + limitReimb
+                + " updatedDate = "
+                + updatedDate;
     }
 }
